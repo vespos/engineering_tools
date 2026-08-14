@@ -65,15 +65,11 @@ EPICS_SETUP=/cds/group/pcds/setup
 EPICS_PROD=/cds/group/pcds/epics
 EPICS_DEV=/cds/group/pcds/epics-dev
 
-# Pixi settings depending on whether you have a local mount to use
-if [ -d /u1/"${USER}" ]; then
-  # local mount: use it for pixi cache
-  export PIXI_CACHE_DIR=/u1/"${USER}"/pixi_cache
-  export PIXI_CACHE_NETFS_REDIRECT="always"
-else
-  # no local mount, but weka is way faster than /tmp somehow
-  export PIXI_CACHE_NETFS_REDIRECT="never"
-fi
+# Use epics-dev for the pixi/uv caches to avoid filling up small home quotas
+# Note: this results in great performance if you also build envs in epics-dev
+export PIXI_CACHE_DIR=/cds/group/pcds/epics-dev/"${USER}"/pixi_cache
+export PIXI_CACHE_NETFS_REDIRECT="always"
+export UV_CACHE_DIR=/cds/group/pcds/epics-dev/"${USER}"/uv_cache
 
 # Default settings for qt
 # Avoid OpenGL-related crash for remote sessions
