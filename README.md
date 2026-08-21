@@ -1035,4 +1035,12 @@ Optional arguments:<br/>
     </td>
 </tr>
 
+<tr>
+   <td>evrserialnum</td>
+   <td>
+Displays the EEROM serial numbers of any SLAC evr/tprs in the machine.<br/>
+<b>This script must be run as root!</b>
+   </td>
+</tr>
+
 </table>
